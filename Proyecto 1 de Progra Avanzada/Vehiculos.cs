@@ -376,7 +376,7 @@ namespace Proyecto_1_de_Progra_Avanzada
             foreach (VehiculoPesado vehiculoPesado in vehiculoPesados)
             {
                 Console.WriteLine($"Matricula :{vehiculoPesado.Matricula} | Marca: {vehiculoPesado.Marca}| Modelo : {vehiculoPesado.Modelo} Tipo : {vehiculoPesado.Type}");
-                
+                Console.ReadKey();
             }
             Console.ReadKey();
         }
