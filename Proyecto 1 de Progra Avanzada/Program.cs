@@ -25,6 +25,7 @@ do
     Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine("\nBIENVENIDO AL PARQUEO DE LA CRUZ");
     Console.ResetColor();
+    Console.ForegroundColor= ConsoleColor.Yellow;
     Console.WriteLine("INGRESE UNA OPCIÓN ");
     Console.WriteLine("1.Registrar Vehículos");
     Console.WriteLine("2.Retiro de Vehículos");
@@ -32,7 +33,7 @@ do
     Console.WriteLine("4.Visualización de espacios disponibles");
     Console.WriteLine("5.Salir");
     int option = int.Parse(Console.ReadLine());
-  
+    Console.ResetColor();
     return option;
 }
  void ShowMenu(ref List<Carro> carros, ref List<Moto> motos, ref List<VehiculoPesado>  vehiculoPesados,ref Parqueo parqueo)
