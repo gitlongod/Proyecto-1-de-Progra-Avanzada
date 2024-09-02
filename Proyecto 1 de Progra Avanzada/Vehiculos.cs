@@ -61,21 +61,34 @@ namespace Proyecto_1_de_Progra_Avanzada
                 case 1:
 
                     string type = "Carro";
+
                     if (carros.Count <= parqueo.EspaciosCarro)
                     {
                         Console.WriteLine("\nIngrese la matrícula del vehículo");
                         string matriculaCar = Console.ReadLine();
-                        Console.WriteLine("\nIngrese la Marca del vehículo");
-                        string marcaCar = Console.ReadLine();
-                        Console.WriteLine("\nIngrese el modelo del vehículo");
-                        string modeloCar = Console.ReadLine();
-                        DateTime date = DateTime.Now;
-                        carros.Add(new Carro(matriculaCar, marcaCar, modeloCar, type, date));
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Se ha Ingresado el carro");
-                        parqueo.EspaciosCarro--;
-                        Console.ResetColor();
-                        Console.ReadKey();
+                        Carro matriculaValidation = carros.Find(x => x.Matricula == matriculaCar);
+                        if (matriculaValidation == null)
+                            {
+                                Console.WriteLine("\nIngrese la Marca del vehículo");
+                                string marcaCar = Console.ReadLine();
+                                Console.WriteLine("\nIngrese el modelo del vehículo");
+                                string modeloCar = Console.ReadLine();
+                                DateTime date = DateTime.Now;
+                                carros.Add(new Carro(matriculaCar, marcaCar, modeloCar, type, date));
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Se ha Ingresado el carro");
+                                parqueo.EspaciosCarro--;
+                                Console.ResetColor();
+                                Console.ReadKey();
+
+                            }                     
+                        else
+                        {
+                            Console.ForegroundColor= ConsoleColor.Red;
+                            Console.WriteLine("ya existe está matrícula del carro ingresado");
+                            Console.ResetColor();
+                            Console.ReadKey();
+                        }
                     }
                     else 
                     {
@@ -91,18 +104,29 @@ namespace Proyecto_1_de_Progra_Avanzada
                     {
 
                         Console.WriteLine("\nIngrese la matrícula del vehículo");
-                        string matriculaCar = Console.ReadLine();
-                        Console.WriteLine("\nIngrese la Marca del vehículo");
-                        string marcaCar = Console.ReadLine();
-                        Console.WriteLine("\nIngrese el modelo del vehículo");
-                        string modeloCar = Console.ReadLine();
-                        DateTime date = DateTime.Now;
-                        vehiculosList.Add(new Moto(matriculaCar, marcaCar, modeloCar, type2, date));
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Se ha ingresado la moto correctamente");
-                        parqueo.EspaciosMoto--;
-                        Console.ResetColor();
-                        Console.ReadKey(); 
+                        string matriculaMoto = Console.ReadLine();
+                        Moto validationMoto = motos.Find(p=>p.Matricula == matriculaMoto);
+                        if (validationMoto == null)
+                        {
+                            Console.WriteLine("\nIngrese la Marca del vehículo");
+                            string marcaCar = Console.ReadLine();
+                            Console.WriteLine("\nIngrese el modelo del vehículo");
+                            string modeloCar = Console.ReadLine();
+                            DateTime date = DateTime.Now;
+                            motos.Add(new Moto(matriculaMoto, marcaCar, modeloCar, type2, date));
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Se ha ingresado la moto correctamente");
+                            parqueo.EspaciosMoto--;
+                            Console.ResetColor();
+                            Console.ReadKey(); 
+                        } 
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("ya existe está matrícula de la moto ingresada");
+                            Console.ResetColor();
+                            Console.ReadKey();
+                        }
                     }
                     else
                     {
@@ -124,7 +148,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                         Console.WriteLine("\nIngrese el modelo del vehículo");
                         string modeloCar = Console.ReadLine();
                         DateTime date = DateTime.Now;
-                        vehiculosList.Add(new VehiculoPesado(matriculaCar, marcaCar, modeloCar, type3, date));
+                        vehiculoPesados.Add(new VehiculoPesado(matriculaCar, marcaCar, modeloCar, type3, date));
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Se ha ingresado el vehículo pesado correctamente");
                         parqueo.EspaciosVehiculoPesado--;
@@ -150,7 +174,7 @@ namespace Proyecto_1_de_Progra_Avanzada
         {
             return DateTime.Now - Date;
         }
-       public static void RetirarVehiculo(ref List<Carro> carros, ref List<Moto> motos, ref List<VehiculoPesado> vehiculoPesados)
+       public static void RetirarVehiculo(ref List<Carro> carros, ref List<Moto> motos, ref List<VehiculoPesado> vehiculoPesados, Parqueo parqueo )
         {
             Console.Clear();
             Console.WriteLine("Ingrese el tipo de vehículo que desea retirar");
@@ -193,6 +217,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                                     carros.Remove(searchCarro);
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Carro retirado con exito");
+                                    parqueo.EspaciosCarro++;
                                     Console.ResetColor();
                                     Console.ReadKey();
 
@@ -213,6 +238,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                                 carros.Remove(searchCarro); 
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Carro retirado con éxito");
+                                parqueo.EspaciosCarro++;
                                 Console.ResetColor();
                                 Console.ReadKey();
                                 break;
@@ -259,6 +285,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                                     motos.Remove(searchMoto);
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Carro retirado con exito");
+                                    parqueo.EspaciosMoto++;
                                     Console.ResetColor();
                                     Console.ReadKey();
                                 }
@@ -278,6 +305,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                                 motos.Remove(searchMoto);
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Carro retirado con éxito");
+                                parqueo.EspaciosMoto++;
                                 Console.ResetColor();
                                 Console.ReadKey();
                                 break;
@@ -323,6 +351,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                                     vehiculoPesados.Remove(searchVehiculoPesado);
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Carro retirado con exito");
+                                    parqueo.EspaciosVehiculoPesado++;
                                     Console.ResetColor();
                                     Console.ReadKey(); 
                                 }
@@ -343,6 +372,7 @@ namespace Proyecto_1_de_Progra_Avanzada
                                 vehiculoPesados.Remove(searchVehiculoPesado);
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Carro retirado con éxito");
+                                parqueo.EspaciosVehiculoPesado++;
                                 Console.ResetColor();
                                 Console.ReadKey();
                                 break;

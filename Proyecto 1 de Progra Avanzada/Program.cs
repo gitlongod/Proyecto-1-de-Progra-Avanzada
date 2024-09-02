@@ -13,6 +13,8 @@ do
 	{
 
         Console.WriteLine(ex.Message);
+        Console.WriteLine("Ingrese una opción Válida");
+        Console.ReadKey();
     }
 } while (true);
 
@@ -41,7 +43,7 @@ do
             Vehiculos.AddVehiculo(ref carros, ref motos, ref vehiculoPesados, parqueo);
             break;
         case 2:
-            Vehiculos.RetirarVehiculo(ref carros, ref motos, ref vehiculoPesados);
+            Vehiculos.RetirarVehiculo(ref carros, ref motos, ref vehiculoPesados,parqueo);
             break;
         case 3:
             Vehiculos.ShowInfo(ref carros, ref motos, ref vehiculoPesados);
